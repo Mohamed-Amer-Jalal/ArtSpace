@@ -7,10 +7,4 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="button_blue">#495D92</color>
-    <color name="card_white">#FFFFFF</color>
-    <color name="artwork_title_black">#222123</color>
-    <color name="artwork_author_black">#19191D</color>
-    <color name="artwork_release_year_black">#55555B</color>
-    <color name="artwork_info_background">#ECEBF4</color>
 </resources>

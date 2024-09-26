@@ -4,12 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,8 +31,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -66,10 +65,10 @@ fun ArtSpace(modifier: Modifier = Modifier) {
     if (artworkNumber == 4) artworkNumber = 0
     if (artworkNumber == -1) artworkNumber = 3
 
-    var artworkImage = 0
-    var artworkDescription = 0
-    var artworkName = 0
-    var artworkReleaseYear = 0
+    @DrawableRes var artworkImage = 0
+    @StringRes var artworkDescription = 0
+    @StringRes var artworkName = 0
+    @StringRes var artworkReleaseYear = 0
 
     when (artworkNumber) {
         0 -> {
@@ -111,10 +110,9 @@ fun ArtSpace(modifier: Modifier = Modifier) {
     ) {
         Card(
             elevation = CardDefaults.cardElevation(defaultElevation = 20.dp),
-            colors = CardDefaults.cardColors(containerColor = colorResource(R.color.card_white)),
+            colors = CardDefaults.cardColors(containerColor = Color.White),
             shape = RectangleShape,
-        )
-        {
+        ) {
             Image(
                 painter = painterResource(artworkImage),
                 contentDescription = stringResource(artworkDescription),
@@ -124,35 +122,22 @@ fun ArtSpace(modifier: Modifier = Modifier) {
                     .height(200.dp),
             )
         }
-        BoxWithConstraints {
-            when {
-                maxWidth < 413.dp -> Spacer(Modifier.height(76.dp))
-                maxWidth < 1281.dp -> Spacer(Modifier.height(20.dp))
-            }
-        }
-        Text(
-            buildAnnotatedString {
+        Spacer(modifier = Modifier.height(76.dp))
+        TextArtSpace(
+            text = buildAnnotatedString {
                 withStyle(
                     style = SpanStyle(
-                        colorResource(R.color.artwork_author_black),
-                        fontWeight = FontWeight.Light,
-                        fontSize = 24.sp
+                        color = Color(0xFF19191D), fontWeight = FontWeight.Light, fontSize = 24.sp
                     )
-                ) {
-                    append(stringResource(artworkName))
-                }
+                ) { append(stringResource(artworkName)) }
                 withStyle(
                     style = SpanStyle(
-                        colorResource(R.color.artwork_author_black),
-                        fontWeight = FontWeight.Light,
-                        fontSize = 24.sp
+                        color = Color(0xFF19191D), fontWeight = FontWeight.Light, fontSize = 24.sp
                     )
-                ) {
-                    append(stringResource(artworkReleaseYear))
-                }
-            },
+                ) { append(stringResource(artworkReleaseYear)) }
+            }.toString(),
             modifier = Modifier
-                .background(colorResource(R.color.artwork_info_background))
+                .background(Color(0xFFECEBF4))
                 .padding(16.dp)
 
         )
@@ -160,13 +145,13 @@ fun ArtSpace(modifier: Modifier = Modifier) {
         Row {
             EditButtons(
                 onClick = { artworkNumber-- },
-                R.string.previous_button,
-                R.color.button_blue
+                buttonText = R.string.previous_button,
+                buttonColor = Color(0xFF495D92)
             )
             EditButtons(
                 onClick = { artworkNumber++ },
-                R.string.next_button,
-                R.color.button_blue
+                buttonText = R.string.next_button,
+                buttonColor = Color(0xFF495D92)
             )
         }
     }
@@ -176,22 +161,30 @@ fun ArtSpace(modifier: Modifier = Modifier) {
 fun EditButtons(
     onClick: () -> Unit,
     @StringRes buttonText: Int,
-    @ColorRes buttonColor: Int,
+    buttonColor: Color,
     modifier: Modifier = Modifier
 ) {
     Button(
-        onClick = onClick,
-        colors = ButtonDefaults.buttonColors(colorResource(buttonColor)),
-        modifier = modifier
+        onClick = onClick, colors = ButtonDefaults.buttonColors(buttonColor), modifier = modifier
     ) {
-        Text(text = stringResource(buttonText))
+        TextArtSpace(text = stringResource(buttonText))
     }
+}
+
+@Composable
+fun TextArtSpace(text: String, modifier: Modifier = Modifier) {
+    Text(
+        text = text,
+        modifier = modifier
+    )
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ArtSpacePreview() {
     ArtSpaceTheme {
-        ArtSpace()
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            ArtSpace(Modifier.padding(innerPadding))
+        }
     }
 }
