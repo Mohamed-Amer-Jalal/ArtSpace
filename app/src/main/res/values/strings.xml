@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Art Space</string>
+
+    // Image Descriptions (contentDescription)
+    <string name="naruto_shippuden_description">naruto shippuden description</string>
+    <string name="mushoku_tensei_description">mushoku tensei description</string>
+    <string name="attack_on_titan_description">attack on titan description</string>
+    <string name="one_piece_description">one piece description</string>
+
+    // Image Titles
+    <string name="one_piece_name">One Piece</string>
+    <string name="naruto_shippuden_name">Naruto Shippuden</string>
+    <string name="attack_on_titan_name">Attack On Titan</string>
+    <string name="mushoku_tensei_name">Mushoku Tensei</string>
+
+    // Image Release Years
+    <string name="naruto_shippuden_release_year">(1998)</string>
+    <string name="mushoku_tensei_release_year">(2012)</string>
+    <string name="attack_on_titan_release_year">(2013)</string>
+    <string name="one_piece_release_year">(1997)</string>
+
+
+    // Buttons
+    <string name="next_button">Next</string>
+    <string name='previous_button'>Previous</string>
+
+</resources>
