@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -59,7 +61,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ArtSpace(modifier: Modifier = Modifier) {
+fun ArtSpace(
+    modifier: Modifier = Modifier
+) {
 
     var artworkNumber by remember { mutableIntStateOf(0) }
     if (artworkNumber == 4) artworkNumber = 0
@@ -104,14 +108,16 @@ fun ArtSpace(modifier: Modifier = Modifier) {
         modifier = modifier
             .padding(20.dp)
             .verticalScroll(rememberScrollState())
-            .fillMaxSize(),
+            .fillMaxSize()
+            .statusBarsPadding()
+            .safeDrawingPadding(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Card(
             elevation = CardDefaults.cardElevation(defaultElevation = 20.dp),
             colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = RectangleShape,
+            shape = RectangleShape
         ) {
             Image(
                 painter = painterResource(artworkImage),
@@ -119,7 +125,7 @@ fun ArtSpace(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .padding(30.dp)
                     .fillMaxWidth()
-                    .height(200.dp),
+                    .height(200.dp)
             )
         }
         Spacer(modifier = Modifier.height(76.dp))
