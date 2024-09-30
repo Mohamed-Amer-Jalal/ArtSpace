@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -64,7 +65,6 @@ class MainActivity : ComponentActivity() {
 fun ArtSpace(
     modifier: Modifier = Modifier
 ) {
-
     var artworkNumber by remember { mutableIntStateOf(0) }
     if (artworkNumber == 4) artworkNumber = 0
     if (artworkNumber == -1) artworkNumber = 3
@@ -171,7 +171,9 @@ fun EditButtons(
     modifier: Modifier = Modifier
 ) {
     Button(
-        onClick = onClick, colors = ButtonDefaults.buttonColors(buttonColor), modifier = modifier
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(buttonColor),
+        modifier = modifier.size(width = 150.dp, height = 50.dp)
     ) {
         TextArtSpace(text = stringResource(buttonText))
     }
@@ -179,10 +181,7 @@ fun EditButtons(
 
 @Composable
 fun TextArtSpace(text: String, modifier: Modifier = Modifier) {
-    Text(
-        text = text,
-        modifier = modifier
-    )
+    Text(text = text, modifier = modifier)
 }
 
 @Preview(showBackground = true, showSystemUi = true)
