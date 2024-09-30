@@ -30,7 +30,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
 fun ArtSpace(
     modifier: Modifier = Modifier
 ) {
-    var artworkNumber by remember { mutableIntStateOf(0) }
+    var artworkNumber by rememberSaveable { mutableIntStateOf(0) }
     if (artworkNumber == 4) artworkNumber = 0
     if (artworkNumber == -1) artworkNumber = 3
 
@@ -154,6 +154,7 @@ fun ArtSpace(
                 buttonText = R.string.previous_button,
                 buttonColor = Color(0xFF495D92)
             )
+            Spacer(modifier = Modifier.weight(0.5f))
             EditButtons(
                 onClick = { artworkNumber++ },
                 buttonText = R.string.next_button,
@@ -173,7 +174,7 @@ fun EditButtons(
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(buttonColor),
-        modifier = modifier.size(width = 150.dp, height = 50.dp)
+        modifier = modifier.size(width = 100.dp, height = 35.dp)
     ) {
         TextArtSpace(text = stringResource(buttonText))
     }
